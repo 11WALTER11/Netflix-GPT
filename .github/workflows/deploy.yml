@@ -13,7 +13,7 @@ jobs:
     steps:
       - name: Print secrets for debugging
         run: |
-          echo "FIREBASE_API_KEY: ${{ vars }}"
+          echo "FIREBASE_API_KEY: ${{ vars.FIREBASE_API_KEY }}"
           
 
       - name: Checkout repo
