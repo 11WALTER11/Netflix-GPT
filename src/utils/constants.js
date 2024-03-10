@@ -5,12 +5,12 @@ export const USER_AVATAR =
 export const BANNER_IMAGE =
   "https://assets.nflxext.com/ffe/siteui/vlv3/5e16108c-fd30-46de-9bb8-0b4e1bbbc509/29d8d7d7-83cc-4b5f-aa9b-6fd4f68bfaa6/IN-en-20240205-popsignuptwoweeks-perspective_alpha_website_small.jpg";
 
-// Use Vite environment variables for sensitive information
+// Use Vite environment variables for sensitive information during local development
 export const TMDB_API_OPTIONS = {
   method: "GET",
   headers: {
     accept: "application/json",
-    Authorization: `Bearer ${import.meta.env.VITE_TMDB_API_KEY}`,
+    Authorization: `Bearer ${import.meta.env.VITE_TMDB_API_KEY || process.env.VITE_TMDB_API_KEY}`,
   },
 };
 
@@ -22,5 +22,5 @@ export const SUPPORTED_LANGUAGES = [
   { identifier: "ur", name: "Urdu" },
 ];
 
-// Use Vite environment variable for API key
-export const OPEN_API_KEY = import.meta.env.VITE_OPEN_API_KEY;
+// Use GitHub Actions environment variables for sensitive information during deployment
+export const OPEN_API_KEY = import.meta.env.VITE_OPEN_API_KEY || process.env.VITE_OPEN_API_KEY;
