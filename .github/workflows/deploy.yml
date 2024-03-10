@@ -36,8 +36,13 @@ jobs:
           echo "VITE_FIREBASE_APP_ID=${{ secrets.FIREBASE_APP_ID }}" >> $GITHUB_ENV
           echo "VITE_OPEN_API_KEY=${{ secrets.OPEN_API_KEY }}" >> $GITHUB_ENV
 
+          export VITE_FIREBASE_API_KEY=${{ secrets.FIREBASE_API_KEY }}
+          export VITE_TMDB_API_KEY=${{ secrets.TMDB_API_KEY }}
+          export VITE_FIREBASE_APP_ID=${{ secrets.FIREBASE_APP_ID }}
+          export VITE_OPEN_API_KEY=${{ secrets.OPEN_API_KEY }}
+
       - name: Print environment variables
-        run: cat $GITHUB_ENV
+        run: env | grep VITE
 
       - name: Build project
         run: npm run build
