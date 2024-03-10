@@ -29,15 +29,15 @@ jobs:
           echo "FIREBASE_APP_ID: ${{ secrets.FIREBASE_APP_ID }}"
           echo "OPEN_API_KEY: ${{ secrets.OPEN_API_KEY }}"
 
-      - name: Build project
+      - name: Set environment variables
         run: |
-          npm run build
-          # Set Vite environment variables for the build
-          VITE_FIREBASE_API_KEY="${{ secrets.FIREBASE_API_KEY }}" \
-          VITE_TMDB_API_KEY="${{ secrets.TMDB_API_KEY }}" \
-          VITE_FIREBASE_APP_ID="${{ secrets.FIREBASE_APP_ID }}" \
-          VITE_OPEN_API_KEY="${{ secrets.OPEN_API_KEY }}" \
-          npm run build
+          echo "VITE_FIREBASE_API_KEY=${{ secrets.FIREBASE_API_KEY }}" >> $GITHUB_ENV
+          echo "VITE_TMDB_API_KEY=${{ secrets.TMDB_API_KEY }}" >> $GITHUB_ENV
+          echo "VITE_FIREBASE_APP_ID=${{ secrets.FIREBASE_APP_ID }}" >> $GITHUB_ENV
+          echo "VITE_OPEN_API_KEY=${{ secrets.OPEN_API_KEY }}" >> $GITHUB_ENV
+
+      - name: Build project
+        run: npm run build
 
       - name: Upload production-ready build files
         uses: actions/upload-artifact@v2
