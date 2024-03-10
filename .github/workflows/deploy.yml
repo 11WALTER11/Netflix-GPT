@@ -11,11 +11,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Print secrets for debugging
-        run: |
-          echo "FIREBASE_API_KEY: ${{ vars.FIREBASE_API_KEY }}"
-          
-
       - name: Checkout repo
         uses: actions/checkout@v2
 
@@ -29,7 +24,7 @@ jobs:
 
       - name: Build project
         run: npm run build
-        env: 
+        env:
           VITE_FIREBASE_API_KEY: ${{ secrets.VITE_FIREBASE_API_KEY }}
           VITE_TMDB_API_KEY: ${{ secrets.VITE_TMDB_API_KEY }}
           VITE_FIREBASE_APP_ID: ${{ secrets.VITE_FIREBASE_APP_ID }}
