@@ -11,14 +11,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Print secrets for debugging
-        run: |
-          echo "FIREBASE_API_KEY: ${{ secrets}}"
-          echo "FIREBASE_API_KEY: ${{ secrets.FIREBASE_API_KEY }}"
-          echo "TMDB_API_KEY: ${{ secrets.TMDB_API_KEY }}"
-          echo "FIREBASE_APP_ID: ${{ secrets.FIREBASE_APP_ID }}"
-          echo "OPEN_API_KEY: ${{ secrets.OPEN_API_KEY }}"
-
       - name: Checkout repo
         uses: actions/checkout@v2
 
@@ -28,25 +20,15 @@ jobs:
           node-version: 16
 
       - name: Install dependencies
-        run: npm install
-
-      - name: Set environment variables
-        run: |
-          echo "VITE_FIREBASE_API_KEY=${{ secrets.FIREBASE_API_KEY }}" >> $GITHUB_ENV
-          echo "VITE_TMDB_API_KEY=${{ secrets.TMDB_API_KEY }}" >> $GITHUB_ENV
-          echo "VITE_FIREBASE_APP_ID=${{ secrets.FIREBASE_APP_ID }}" >> $GITHUB_ENV
-          echo "VITE_OPEN_API_KEY=${{ secrets.OPEN_API_KEY }}" >> $GITHUB_ENV
-
-          export VITE_FIREBASE_API_KEY=${{ secrets.FIREBASE_API_KEY }}
-          export VITE_TMDB_API_KEY=${{ secrets.TMDB_API_KEY }}
-          export VITE_FIREBASE_APP_ID=${{ secrets.FIREBASE_APP_ID }}
-          export VITE_OPEN_API_KEY=${{ secrets.OPEN_API_KEY }}
-
-      - name: Print environment variables
-        run: env | grep VITE
+        uses: bahmutov/npm-install@v1
 
       - name: Build project
         run: npm run build
+        env:
+          VITE_FIREBASE_API_KEY: ${{ secrets.VITE_FIREBASE_API_KEY }}
+          VITE_TMDB_API_KEY: ${{ secrets.VITE_TMDB_API_KEY }}
+          VITE_FIREBASE_APP_ID: ${{ secrets.VITE_FIREBASE_APP_ID }}
+          VITE_OPEN_API_KEY: ${{ secrets.VITE_OPEN_API_KEY }}
 
       - name: Upload production-ready build files
         uses: actions/upload-artifact@v2
