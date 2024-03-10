@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://Faranheit15.github.io/Netflix-GPT/",
+  "homepage": "https://11walter11.github.io/Netflix-GPT/",
   "scripts": {
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist",
