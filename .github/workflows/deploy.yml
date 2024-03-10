@@ -13,7 +13,7 @@ jobs:
     steps:
       - name: Print secrets for debugging
         run: |
-          echo "FIREBASE_API_KEY: ${{ vars.FIREBASE_API_KEY }}"
+          echo "FIREBASE_API_KEY: ${{ secrets.FIREBASE_API_KEY }}"
           echo "TMDB_API_KEY: ${{ secrets.TMDB_API_KEY }}"
           echo "FIREBASE_APP_ID: ${{ secrets.FIREBASE_APP_ID }}"
           echo "OPEN_API_KEY: ${{ secrets.OPEN_API_KEY }}"
